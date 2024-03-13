@@ -1,3 +1,5 @@
+import '../pages/index.css';
+
 // @todo: Темплейт карточки
 const cardTemplate = document.querySelector("#card-template").content; //записываю содержимое блока template
 
@@ -47,5 +49,7 @@ function displayCard(arrCards) {
   //     );
   //   }
 }
+
+
 
 displayCard(initialCards);
