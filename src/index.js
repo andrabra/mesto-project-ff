@@ -1,6 +1,6 @@
 import "../pages/index.css";
 import { initialCards } from "../src/cards.js";
-import { createCard, deleteCard, likeCard } from "../src/components/card.js";
+import { createCard, deleteCard, likeCard, openCard } from "../src/components/card.js";
 import {
   openModal,
   closeModal,
@@ -15,10 +15,11 @@ const cardContainer = document.querySelector(".places__list"); //записыв�
 //todo: кнопки открытия попапов
 export const editBtn = document.querySelector(".profile__edit-button");
 export const addBtn = document.querySelector(".profile__add-button");
-
+export const imageBtns = document.querySelectorAll(".card__image");
 //todo: попапы
 export const popupTypeEdit = document.querySelector(".popup_type_edit");
 export const popupTypeNewCard = document.querySelector(".popup_type_new-card");
+export const popupTypeImage = document.querySelector(".popup_type_image");
 //todo: форма редактирования профиля
 export const profileForm = popupTypeEdit.querySelector(".popup__form");
 //todo: кнопки закрытия попапов
@@ -88,7 +89,7 @@ formElement.addEventListener("submit", handleFormSubmit);
 function displayCard(arrCards) {
   arrCards.forEach(function (item) {
     cardContainer.append(
-      createCard(item.link, item.name, deleteCard, likeCard)
+      createCard(item.link, item.name, deleteCard, likeCard, openCard)
     );
   });
 }

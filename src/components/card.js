@@ -1,15 +1,20 @@
 import { cardTemplate } from "../index.js";
+import { openModal } from "../components/modal.js";
+import { popupTypeImage } from "../index.js";
 
 //todo: Функция создания карточки
-export function createCard(imgSrc, title, deleteFnc, likeCard) {
+export function createCard(imgSrc, title, deleteFnc, likeCard, openCard) {
   const cardTemplateClone = cardTemplate.querySelector(".card").cloneNode(true); //выбираю карточку из template и клонирую её
 
   const deleteButton = cardTemplateClone.querySelector(".card__delete-button"); //выбираю кнопку из копии карточки
   const cardLike = cardTemplateClone.querySelector(".card__like-button"); //выбираю кнопку из копии карточки
+  const cardImage = cardTemplateClone.querySelector(".card__image");
 
   deleteButton.addEventListener("click", () => deleteFnc(cardTemplateClone));
   cardLike.addEventListener("click", () => likeCard(cardTemplateClone));
-
+  cardImage.addEventListener("click", () => {
+    openCard(cardImage);
+  });
   const cardImg = cardTemplateClone.querySelector(".card__image"); //выбираю из клона тег изображения
   const cardTitle = cardTemplateClone.querySelector(".card__title"); //выбираю из клона тег тайтла
 
@@ -26,5 +31,16 @@ export function deleteCard(card) {
 }
 //todo: Функция лайка карточки
 export function likeCard(card) {
-  card.querySelector(".card__like-button").classList.toggle("card__like-button_is-active");
+  card
+    .querySelector(".card__like-button")
+    .classList.toggle("card__like-button_is-active");
+}
+
+//todo: Функция открытия попапа с карточкой
+export function openCard(card) {
+  const popupImage = popupTypeImage.querySelector(".popup__image");
+  const popupCaption = popupTypeImage.querySelector(".popup__caption");
+  popupCaption.textContent = card.alt;
+  popupImage.src = card.src;
+  openModal(popupTypeImage);
 }
