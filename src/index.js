@@ -1,7 +1,11 @@
 import "../pages/index.css";
 import { initialCards } from "../src/cards.js";
 import { createCard, deleteCard, likeCard } from "../src/components/card.js";
-import { openModal, closeModal } from "../src/components/modal.js";
+import {
+  openModal,
+  closeModal,
+  onOpenProfileModal,
+} from "../src/components/modal.js";
 
 //todo: Темплейт карточки
 export const cardTemplate = document.querySelector("#card-template").content; //записываю содержимое блока template
@@ -15,21 +19,24 @@ export const addBtn = document.querySelector(".profile__add-button");
 //todo: попапы
 export const popupTypeEdit = document.querySelector(".popup_type_edit");
 export const popupTypeNewCard = document.querySelector(".popup_type_new-card");
+//todo: форма редактирования профиля
+export const profileForm = popupTypeEdit.querySelector(".popup__form");
 //todo: кнопки закрытия попапов
 export const popups = document.querySelectorAll(".popup");
 export const popupCloseBtns = document.querySelectorAll(".popup__close");
 
-////* Открытие попапов
+//* Открытие попапов
 editBtn.addEventListener("click", () => {
+  onOpenProfileModal(profileForm);
   openModal(popupTypeEdit);
 });
 
 addBtn.addEventListener("click", () => {
   openModal(popupTypeNewCard);
 });
-////* Открытие попапов
+//* Открытие попапов
 
-////* Закрытие попапов
+//* Закрытие попапов
 document.addEventListener("keydown", function (event) {
   if (event.key === "Escape") {
     closeModal(popups);
@@ -49,7 +56,7 @@ popups.forEach((popup) => {
     }
   });
 });
-////* Закрытие попапов
+//* Закрытие попапов
 
 // Находим форму в DOM
 const formElement = popupTypeEdit.querySelector(".popup__form");
@@ -61,7 +68,6 @@ const jobInput = formElement.querySelector(".popup__input_type_description");
 // она никуда отправляться не будет
 function handleFormSubmit(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-
   // Получите значение полей jobInput и nameInput из свойства value
   let nameValue = nameInput.value;
   let jobValue = jobInput.value;
