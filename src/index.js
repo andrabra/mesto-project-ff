@@ -1,8 +1,7 @@
 import "../pages/index.css";
 import { initialCards } from "../src/cards.js";
-import { createCard, deleteCard } from "../src/components/card.js";
+import { createCard, deleteCard, likeCard } from "../src/components/card.js";
 import { openModal, closeModal } from "../src/components/modal.js";
-import { likeCard } from "../src/components/card.js";
 
 //todo: Темплейт карточки
 export const cardTemplate = document.querySelector("#card-template").content; //записываю содержимое блока template
@@ -53,19 +52,15 @@ popups.forEach((popup) => {
 ////* Закрытие попапов
 
 // Находим форму в DOM
-const formElement = popupTypeEdit.querySelector(".popup__form"); // Воспользуйтесь методом querySelector()
+const formElement = popupTypeEdit.querySelector(".popup__form");
 // Находим поля формы в DOM
-const nameInput = formElement.querySelector(".popup__input_type_name"); // Воспользуйтесь инструментом .querySelector()
-const jobInput = formElement.querySelector(".popup__input_type_description"); // Воспользуйтесь инструментом .querySelector()
-
-
+const nameInput = formElement.querySelector(".popup__input_type_name");
+const jobInput = formElement.querySelector(".popup__input_type_description");
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 function handleFormSubmit(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-  // Так мы можем определить свою логику отправки.
-  // О том, как это делать, расскажем позже.
 
   // Получите значение полей jobInput и nameInput из свойства value
   let nameValue = nameInput.value;
@@ -78,7 +73,6 @@ function handleFormSubmit(evt) {
   profileDescription.textContent = jobValue;
   closeModal(popups);
 }
-
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»

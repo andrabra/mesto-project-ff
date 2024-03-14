@@ -1,6 +1,6 @@
 import { cardTemplate } from "../index.js";
 
-// @todo: Функция создания карточки
+//todo: Функция создания карточки
 export function createCard(imgSrc, title, deleteFnc, likeCard) {
   const cardTemplateClone = cardTemplate.querySelector(".card").cloneNode(true); //выбираю карточку из template и клонирую её
 
@@ -20,11 +20,11 @@ export function createCard(imgSrc, title, deleteFnc, likeCard) {
   return cardTemplateClone; //возвращаю заполненную карточку
 }
 
-// @todo: Функция удаления карточки
+//todo: Функция удаления карточки
 export function deleteCard(card) {
   card.remove();
 }
-
+//todo: Функция лайка карточки
 export function likeCard(card) {
   card.querySelector(".card__like-button").classList.toggle("card__like-button_is-active");
 }
