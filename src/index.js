@@ -18,18 +18,18 @@ export const cardTemplate = document.querySelector("#card-template").content; //
 const cardContainer = document.querySelector(".places__list"); //записываю место куда буду вставлять карточки
 
 //todo: кнопки открытия попапов
-export const editBtn = document.querySelector(".profile__edit-button");
-export const addBtn = document.querySelector(".profile__add-button");
-export const imageBtns = document.querySelectorAll(".card__image");
+const editBtn = document.querySelector(".profile__edit-button");
+const addBtn = document.querySelector(".profile__add-button");
+const imageBtns = document.querySelectorAll(".card__image");
 //todo: попапы
-export const popupTypeEdit = document.querySelector(".popup_type_edit");
-export const popupTypeNewCard = document.querySelector(".popup_type_new-card");
+const popupTypeEdit = document.querySelector(".popup_type_edit");
+const popupTypeNewCard = document.querySelector(".popup_type_new-card");
 export const popupTypeImage = document.querySelector(".popup_type_image");
 //todo: форма редактирования профиля
-export const profileForm = popupTypeEdit.querySelector(".popup__form");
+const profileForm = popupTypeEdit.querySelector(".popup__form");
 //todo: кнопки закрытия попапов
-export const popups = document.querySelectorAll(".popup");
-export const popupCloseBtns = document.querySelectorAll(".popup__close");
+const popups = document.querySelectorAll(".popup");
+const popupCloseBtns = document.querySelectorAll(".popup__close");
 
 //* Открытие попапов
 editBtn.addEventListener("click", () => {
