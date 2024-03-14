@@ -2,6 +2,7 @@ import "../pages/index.css";
 import { initialCards } from "../src/cards.js";
 import { createCard, deleteCard } from "../src/components/card.js";
 import { openModal, closeModal } from "../src/components/modal.js";
+import { likeCard } from "../src/components/card.js";
 
 //todo: Темплейт карточки
 export const cardTemplate = document.querySelector("#card-template").content; //записываю содержимое блока template
@@ -19,7 +20,7 @@ export const popupTypeNewCard = document.querySelector(".popup_type_new-card");
 export const popups = document.querySelectorAll(".popup");
 export const popupCloseBtns = document.querySelectorAll(".popup__close");
 
-
+////* Открытие попапов
 editBtn.addEventListener("click", () => {
   openModal(popupTypeEdit);
 });
@@ -27,6 +28,7 @@ editBtn.addEventListener("click", () => {
 addBtn.addEventListener("click", () => {
   openModal(popupTypeNewCard);
 });
+////* Открытие попапов
 
 ////* Закрытие попапов
 document.addEventListener("keydown", function (event) {
@@ -38,7 +40,7 @@ document.addEventListener("keydown", function (event) {
 popupCloseBtns.forEach((popup) => {
   popup.addEventListener("mousedown", () => {
     closeModal(popups);
-  })
+  });
 });
 
 popups.forEach((popup) => {
@@ -50,48 +52,44 @@ popups.forEach((popup) => {
 });
 ////* Закрытие попапов
 
-
 // Находим форму в DOM
-const formElement = popupTypeEdit.querySelector(".popup__form");// Воспользуйтесь методом querySelector()
+const formElement = popupTypeEdit.querySelector(".popup__form"); // Воспользуйтесь методом querySelector()
 // Находим поля формы в DOM
-const nameInput = formElement.querySelector(".popup__input_type_name");// Воспользуйтесь инструментом .querySelector()
-const jobInput = formElement.querySelector(".popup__input_type_description");// Воспользуйтесь инструментом .querySelector()
+const nameInput = formElement.querySelector(".popup__input_type_name"); // Воспользуйтесь инструментом .querySelector()
+const jobInput = formElement.querySelector(".popup__input_type_description"); // Воспользуйтесь инструментом .querySelector()
+
+
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 function handleFormSubmit(evt) {
-    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-                                                // Так мы можем определить свою логику отправки.
-                                                // О том, как это делать, расскажем позже.
+  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+  // Так мы можем определить свою логику отправки.
+  // О том, как это делать, расскажем позже.
 
-    // Получите значение полей jobInput и nameInput из свойства value
-    let nameValue = nameInput.value;
-    let jobValue = jobInput.value;
-    // Выберите элементы, куда должны быть вставлены значения полей
-    let profileTitle = document.querySelector(".profile__title");
-    let profileDescription = document.querySelector(".profile__description");   
-    // Вставьте новые значения с помощью textContent
-    profileTitle.textContent = nameValue;
-    profileDescription.textContent = jobValue;
-    closeModal(popups);
+  // Получите значение полей jobInput и nameInput из свойства value
+  let nameValue = nameInput.value;
+  let jobValue = jobInput.value;
+  // Выберите элементы, куда должны быть вставлены значения полей
+  let profileTitle = document.querySelector(".profile__title");
+  let profileDescription = document.querySelector(".profile__description");
+  // Вставьте новые значения с помощью textContent
+  profileTitle.textContent = nameValue;
+  profileDescription.textContent = jobValue;
+  closeModal(popups);
 }
+
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-formElement.addEventListener('submit', handleFormSubmit);
-
-
-
-
-
-
-
-
+formElement.addEventListener("submit", handleFormSubmit);
 
 //todo: Вывести карточки на страницу
 function displayCard(arrCards) {
   arrCards.forEach(function (item) {
-    cardContainer.append(createCard(item.link, item.name, deleteCard));
+    cardContainer.append(
+      createCard(item.link, item.name, deleteCard, likeCard)
+    );
   });
 }
 
