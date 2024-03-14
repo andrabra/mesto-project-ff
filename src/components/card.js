@@ -12,8 +12,9 @@ export function createCard(imgSrc, title, deleteFnc, likeCard, openCard) {
 
   deleteButton.addEventListener("click", () => deleteFnc(cardTemplateClone));
   cardLike.addEventListener("click", () => likeCard(cardTemplateClone));
+
   cardImage.addEventListener("click", () => {
-    openCard(cardImage);
+    openCard(cardTemplateClone);
   });
   const cardImg = cardTemplateClone.querySelector(".card__image"); //выбираю из клона тег изображения
   const cardTitle = cardTemplateClone.querySelector(".card__title"); //выбираю из клона тег тайтла
@@ -40,7 +41,7 @@ export function likeCard(card) {
 export function openCard(card) {
   const popupImage = popupTypeImage.querySelector(".popup__image");
   const popupCaption = popupTypeImage.querySelector(".popup__caption");
-  popupCaption.textContent = card.alt;
-  popupImage.src = card.src;
+  popupImage.src = card.querySelector(".card__image").src;
+  popupCaption.textContent = card.querySelector(".card__title").textContent;;
   openModal(popupTypeImage);
 }

@@ -1,6 +1,11 @@
 import "../pages/index.css";
 import { initialCards } from "../src/cards.js";
-import { createCard, deleteCard, likeCard, openCard } from "../src/components/card.js";
+import {
+  createCard,
+  deleteCard,
+  likeCard,
+  openCard,
+} from "../src/components/card.js";
 import {
   openModal,
   closeModal,
@@ -51,7 +56,7 @@ popupCloseBtns.forEach((popup) => {
 });
 
 popups.forEach((popup) => {
-  popup.addEventListener("click", (evt) => {
+  popup.addEventListener("mousedown", (evt) => {
     if (evt.currentTarget === evt.target) {
       closeModal(popups);
     }
@@ -85,13 +90,45 @@ function handleFormSubmit(evt) {
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener("submit", handleFormSubmit);
 
-//todo: Вывести карточки на страницу
-function displayCard(arrCards) {
-  arrCards.forEach(function (item) {
-    cardContainer.append(
-      createCard(item.link, item.name, deleteCard, likeCard, openCard)
-    );
-  });
+const newPlaceForm = popupTypeNewCard.querySelector(".popup__form");
+
+const placeNameInput = newPlaceForm.querySelector(
+  ".popup__input_type_card-name"
+);
+const linkInput = newPlaceForm.querySelector(".popup__input_type_url");
+
+function handleNewCard(evt) {
+  evt.preventDefault();
+
+  let name = placeNameInput.value;
+  let link = linkInput.value;
+
+  let newCard = {
+    name: name,
+    link: link,
+  };
+  initialCards.unshift(newCard);
+  console.log("initialCards: ", initialCards);
+  closeModal(popups);
 }
 
-displayCard(initialCards);
+popupTypeNewCard
+  .querySelector(".popup__form")
+  .addEventListener("submit", handleNewCard);
+
+//todo: Вывести карточки на страницу
+// function displayCard(arrCards) {
+//   arrCards.forEach(function (item) {
+//     cardContainer.append(
+//       createCard(item.link, item.name, deleteCard, likeCard, openCard)
+//     );
+//   });
+// }
+
+initialCards.forEach(function (item) {
+  cardContainer.append(
+    createCard(item.link, item.name, deleteCard, likeCard, openCard)
+  );
+});
+
+// displayCard(initialCards);
