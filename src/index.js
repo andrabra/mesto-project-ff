@@ -103,12 +103,14 @@ function handleNewCard(evt) {
   let name = placeNameInput.value;
   let link = linkInput.value;
 
-  let newCard = {
-    name: name,
-    link: link,
-  };
-  initialCards.unshift(newCard);
-  console.log("initialCards: ", initialCards);
+  // let newCard = {
+  //   name: name,
+  //   link: link,
+  // };
+  // initialCards.unshift(newCard);
+  cardContainer.prepend(createCard(link, name, deleteCard, likeCard, openCard));
+
+
   closeModal(popups);
 }
 
