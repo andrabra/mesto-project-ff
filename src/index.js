@@ -24,7 +24,7 @@ document.addEventListener("keydown", function (event) {
 });
 
 popupClose.addEventListener("mousedown", () => {
-  closeModal(popup);
+  closeModal(popupTypeEdit);
 });
 
 // @todo: Вывести карточки на страницу
