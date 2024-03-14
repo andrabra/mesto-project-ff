@@ -103,14 +103,8 @@ function handleNewCard(evt) {
   let name = placeNameInput.value;
   let link = linkInput.value;
 
-  // let newCard = {
-  //   name: name,
-  //   link: link,
-  // };
-  // initialCards.unshift(newCard);
   cardContainer.prepend(createCard(link, name, deleteCard, likeCard, openCard));
-
-
+  newPlaceForm.reset();
   closeModal(popups);
 }
 
@@ -119,18 +113,12 @@ popupTypeNewCard
   .addEventListener("submit", handleNewCard);
 
 //todo: Вывести карточки на страницу
-// function displayCard(arrCards) {
-//   arrCards.forEach(function (item) {
-//     cardContainer.append(
-//       createCard(item.link, item.name, deleteCard, likeCard, openCard)
-//     );
-//   });
-// }
+function displayCard(arrCards) {
+  arrCards.forEach(function (item) {
+    cardContainer.append(
+      createCard(item.link, item.name, deleteCard, likeCard, openCard)
+    );
+  });
+}
 
-initialCards.forEach(function (item) {
-  cardContainer.append(
-    createCard(item.link, item.name, deleteCard, likeCard, openCard)
-  );
-});
-
-// displayCard(initialCards);
+displayCard(initialCards);
