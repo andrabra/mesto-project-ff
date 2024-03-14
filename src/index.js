@@ -27,6 +27,12 @@ popupClose.addEventListener("mousedown", () => {
   closeModal(popupTypeEdit);
 });
 
+popup.addEventListener("click", (evt) => {
+  if (evt.currentTarget === evt.target) {
+    closeModal(popup);
+  }
+})
+
 // @todo: Вывести карточки на страницу
 function displayCard(arrCards) {
   arrCards.forEach(function (item) {
