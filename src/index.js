@@ -1,5 +1,5 @@
-import "../pages/index.css";
-import { initialCards } from "../src/cards.js";
+import "./pages/index.css";
+import { initialCards } from "./components/cards.js";
 import {
   createCard,
   deleteCard,
@@ -7,12 +7,12 @@ import {
   openCard,
   handleProfileEditSubmit,
   handleNewCardSubmit,
-} from "../src/components/card.js";
+} from "./components/card.js";
 import {
   openModal,
   closeModal,
   onOpenProfileModal,
-} from "../src/components/modal.js";
+} from "./components/modal.js";
 
 //todo: Темплейт карточки
 export const cardTemplate = document.querySelector("#card-template").content; //записываю содержимое блока template

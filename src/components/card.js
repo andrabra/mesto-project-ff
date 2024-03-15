@@ -7,9 +7,9 @@ import {
   linkInput,
   cardContainer,
   newPlaceForm,
+  popupTypeImage,
 } from "../index.js";
 import { openModal, closeModal } from "../components/modal.js";
-import { popupTypeImage } from "../index.js";
 
 //todo: Функция создания карточки
 export function createCard(imgSrc, title, deleteFnc, likeCard, openCard) {
