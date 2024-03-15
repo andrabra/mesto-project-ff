@@ -17,19 +17,18 @@ export function createCard(imgSrc, title, deleteFnc, likeCard, openCard) {
 
   const deleteButton = cardTemplateClone.querySelector(".card__delete-button"); //выбираю кнопку из копии карточки
   const cardLike = cardTemplateClone.querySelector(".card__like-button"); //выбираю кнопку из копии карточки
-  const cardImage = cardTemplateClone.querySelector(".card__image");
+  const cardImage = cardTemplateClone.querySelector(".card__image"); //выбираю из клона тег изображения
+  const cardTitle = cardTemplateClone.querySelector(".card__title"); //выбираю из клона тег тайтла
 
   deleteButton.addEventListener("click", () => deleteFnc(cardTemplateClone));
-  cardLike.addEventListener("click", () => likeCard(cardTemplateClone));
+  cardLike.addEventListener("click", () => likeCard(cardLike));
 
   cardImage.addEventListener("click", () => {
     openCard(cardTemplateClone);
   });
-  const cardImg = cardTemplateClone.querySelector(".card__image"); //выбираю из клона тег изображения
-  const cardTitle = cardTemplateClone.querySelector(".card__title"); //выбираю из клона тег тайтла
 
-  cardImg.src = imgSrc; //заполняю из аргумента
-  cardImg.alt = title; //заполняю alt
+  cardImage.src = imgSrc; //заполняю из аргумента
+  cardImage.alt = title; //заполняю alt
   cardTitle.textContent = title; //заполняю из аргумента
 
   return cardTemplateClone; //возвращаю заполненную карточку
@@ -41,9 +40,7 @@ export function deleteCard(card) {
 }
 //todo: Функция лайка карточки
 export function likeCard(card) {
-  card
-    .querySelector(".card__like-button")
-    .classList.toggle("card__like-button_is-active");
+  card.classList.toggle("card__like-button_is-active");
 }
 
 //todo: Функция открытия попапа с карточкой
@@ -51,6 +48,7 @@ export function openCard(card) {
   const popupImage = popupTypeImage.querySelector(".popup__image");
   const popupCaption = popupTypeImage.querySelector(".popup__caption");
   popupImage.src = card.querySelector(".card__image").src;
+  popupImage.alt = card.querySelector(".card__image").alt;
   popupCaption.textContent = card.querySelector(".card__title").textContent;
   openModal(popupTypeImage);
 }
