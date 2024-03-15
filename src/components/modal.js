@@ -8,10 +8,4 @@ export function closeModal(elements) {
   });
 }
 
-export function onOpenProfileModal(form) {
-  form.elements.name.value =
-    document.querySelector(".profile__title").textContent;
-  form.elements.description.value = document.querySelector(
-    ".profile__description"
-  ).textContent;
-}
+

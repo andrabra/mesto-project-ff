@@ -8,11 +8,7 @@ import {
   handleProfileEditSubmit,
   handleNewCardSubmit,
 } from "./components/card.js";
-import {
-  openModal,
-  closeModal,
-  onOpenProfileModal,
-} from "./components/modal.js";
+import { openModal, closeModal } from "./components/modal.js";
 
 //todo: Темплейт карточки
 export const cardTemplate = document.querySelector("#card-template").content; //записываю содержимое блока template
@@ -35,6 +31,11 @@ const editProfileForm = document.forms["edit-profile"];
 export const popups = document.querySelectorAll(".popup");
 const popupCloseBtns = document.querySelectorAll(".popup__close");
 
+//todo: Текстовые поля формы
+const profileTitle = document.querySelector(".profile__title").textContent;
+const profileDescription = document.querySelector(
+  ".profile__description"
+).textContent;
 
 //todo: Находим поля формы в DOM
 export const nameInput = editProfileForm.querySelector(
@@ -87,6 +88,11 @@ popups.forEach((popup) => {
 //todo: Добавление обработчиков на формы
 editProfileForm.addEventListener("submit", handleProfileEditSubmit);
 newPlaceForm.addEventListener("submit", handleNewCardSubmit);
+
+function onOpenProfileModal(form) {
+  form.elements.name.value = profileTitle;
+  form.elements.description.value = profileDescription;
+}
 
 //todo: Вывести карточки на страницу
 function displayCards(arrCards) {
