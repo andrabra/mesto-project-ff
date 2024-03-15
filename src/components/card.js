@@ -57,19 +57,18 @@ export function openCard(card) {
 
 //todo: Функция отправки новых данных профиля
 export function handleProfileEditSubmit(evt) {
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-  // Получите значение полей jobInput и nameInput из свойства value
-  let nameValue = nameInput.value;
-  let jobValue = jobInput.value;
-  // Выберите элементы, куда должны быть вставлены значения полей
-  let profileTitle = document.querySelector(".profile__title");
-  let profileDescription = document.querySelector(".profile__description");
-  // Вставьте новые значения с помощью textContent
+  evt.preventDefault();
+  const nameValue = nameInput.value;
+  const jobValue = jobInput.value;
+
+  const profileTitle = document.querySelector(".profile__title");
+  const profileDescription = document.querySelector(".profile__description");
+
   profileTitle.textContent = nameValue;
   profileDescription.textContent = jobValue;
   closeModal(popups);
 }
-
+//todo: Функция создания новой карточки
 export function handleNewCardSubmit(evt) {
   evt.preventDefault();
 
