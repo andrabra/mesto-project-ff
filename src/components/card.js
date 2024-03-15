@@ -1,4 +1,13 @@
-import { cardTemplate, nameInput, jobInput, popups } from "../index.js";
+import {
+  cardTemplate,
+  nameInput,
+  jobInput,
+  popups,
+  placeNameInput,
+  linkInput,
+  cardContainer,
+  newPlaceForm,
+} from "../index.js";
 import { openModal, closeModal } from "../components/modal.js";
 import { popupTypeImage } from "../index.js";
 
@@ -42,10 +51,9 @@ export function openCard(card) {
   const popupImage = popupTypeImage.querySelector(".popup__image");
   const popupCaption = popupTypeImage.querySelector(".popup__caption");
   popupImage.src = card.querySelector(".card__image").src;
-  popupCaption.textContent = card.querySelector(".card__title").textContent;;
+  popupCaption.textContent = card.querySelector(".card__title").textContent;
   openModal(popupTypeImage);
 }
-
 
 //todo: Функция отправки новых данных профиля
 export function handleProfileEditSubmit(evt) {
@@ -59,5 +67,16 @@ export function handleProfileEditSubmit(evt) {
   // Вставьте новые значения с помощью textContent
   profileTitle.textContent = nameValue;
   profileDescription.textContent = jobValue;
+  closeModal(popups);
+}
+
+export function handleNewCardSubmit(evt) {
+  evt.preventDefault();
+
+  let name = placeNameInput.value;
+  let link = linkInput.value;
+
+  cardContainer.prepend(createCard(link, name, deleteCard, likeCard, openCard));
+  newPlaceForm.reset();
   closeModal(popups);
 }

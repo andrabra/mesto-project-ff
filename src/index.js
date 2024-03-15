@@ -5,7 +5,8 @@ import {
   deleteCard,
   likeCard,
   openCard,
-  handleProfileEditSubmit
+  handleProfileEditSubmit,
+  handleNewCardSubmit
 } from "../src/components/card.js";
 import {
   openModal,
@@ -16,12 +17,11 @@ import {
 //todo: Темплейт карточки
 export const cardTemplate = document.querySelector("#card-template").content; //записываю содержимое блока template
 //todo: DOM узлы
-const cardContainer = document.querySelector(".places__list"); //записываю место куда буду вставлять карточки
+export const cardContainer = document.querySelector(".places__list"); //записываю место куда буду вставлять карточки
 
 //todo: кнопки открытия попапов
 const editBtn = document.querySelector(".profile__edit-button");
 const addBtn = document.querySelector(".profile__add-button");
-// const imageBtns = document.querySelectorAll(".card__image");
 //todo: попапы
 const popupTypeEdit = document.querySelector(".popup_type_edit");
 const popupTypeNewCard = document.querySelector(".popup_type_new-card");
@@ -41,7 +41,6 @@ editBtn.addEventListener("click", () => {
 addBtn.addEventListener("click", () => {
   openModal(popupTypeNewCard);
 });
-
 
 //todo: Закрытие попапов
 document.addEventListener("keydown", (event) => {
@@ -64,36 +63,25 @@ popups.forEach((popup) => {
   });
 });
 
-
 //todo: Находим форму в DOM
 const formElement = popupTypeEdit.querySelector(".popup__form");
 //todo: Находим поля формы в DOM
 export const nameInput = formElement.querySelector(".popup__input_type_name");
-export const jobInput = formElement.querySelector(".popup__input_type_description");
-//todo: 
+export const jobInput = formElement.querySelector(
+  ".popup__input_type_description"
+);
+//todo:
 formElement.addEventListener("submit", handleProfileEditSubmit);
 
-
-
-
 //todo: Находим форму в DOM
-const newPlaceForm = popupTypeNewCard.querySelector(".popup__form");
+export const newPlaceForm = popupTypeNewCard.querySelector(".popup__form");
 //todo: Находим поля формы в DOM
 export const placeNameInput = newPlaceForm.querySelector(
   ".popup__input_type_card-name"
 );
 export const linkInput = newPlaceForm.querySelector(".popup__input_type_url");
 
-function handleNewCardSubmit(evt) {
-  evt.preventDefault();
 
-  let name = placeNameInput.value;
-  let link = linkInput.value;
-
-  cardContainer.prepend(createCard(link, name, deleteCard, likeCard, openCard));
-  newPlaceForm.reset();
-  closeModal(popups);
-}
 
 popupTypeNewCard
   .querySelector(".popup__form")
