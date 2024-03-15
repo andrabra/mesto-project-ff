@@ -16,7 +16,7 @@ import {
 
 //todo: Темплейт карточки
 export const cardTemplate = document.querySelector("#card-template").content; //записываю содержимое блока template
-//todo: DOM узлы
+//todo: Список со всеми карточками
 export const cardContainer = document.querySelector(".places__list"); //записываю место куда буду вставлять карточки
 
 //todo: кнопки открытия попапов
@@ -29,13 +29,13 @@ const popupTypeNewCard = document.querySelector(".popup_type_new-card");
 export const popupTypeImage = document.querySelector(".popup_type_image");
 
 //todo: форма редактирования профиля
-const profileForm = popupTypeEdit.querySelector(".popup__form");
+const editProfileForm = document.forms["edit-profile"];
+
 //todo: кнопки закрытия попапов
 export const popups = document.querySelectorAll(".popup");
 const popupCloseBtns = document.querySelectorAll(".popup__close");
 
-//todo: Находим форму изменения профиля в DOM
-const editProfileForm = popupTypeEdit.querySelector(".popup__form");
+
 //todo: Находим поля формы в DOM
 export const nameInput = editProfileForm.querySelector(
   ".popup__input_type_name"
@@ -45,7 +45,8 @@ export const jobInput = editProfileForm.querySelector(
 );
 
 //todo: Находим форму добавления новой карточки в DOM
-export const newPlaceForm = popupTypeNewCard.querySelector(".popup__form");
+export const newPlaceForm = document.forms["new-place"];
+// new-place
 //todo: Находим поля формы в DOM
 export const placeNameInput = newPlaceForm.querySelector(
   ".popup__input_type_card-name"
@@ -54,7 +55,7 @@ export const linkInput = newPlaceForm.querySelector(".popup__input_type_url");
 
 //todo: Открытие попапов
 editBtn.addEventListener("click", () => {
-  onOpenProfileModal(profileForm);
+  onOpenProfileModal(editProfileForm);
   openModal(popupTypeEdit);
 });
 
