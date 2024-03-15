@@ -89,7 +89,7 @@ editProfileForm.addEventListener("submit", handleProfileEditSubmit);
 newPlaceForm.addEventListener("submit", handleNewCardSubmit);
 
 //todo: Вывести карточки на страницу
-function displayCard(arrCards) {
+function displayCards(arrCards) {
   arrCards.forEach(function (item) {
     cardContainer.append(
       createCard(item.link, item.name, deleteCard, likeCard, openCard)
@@ -97,4 +97,4 @@ function displayCard(arrCards) {
   });
 }
 
-displayCard(initialCards);
+displayCards(initialCards);
