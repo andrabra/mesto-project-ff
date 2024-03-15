@@ -1,5 +1,5 @@
-import { cardTemplate } from "../index.js";
-import { openModal } from "../components/modal.js";
+import { cardTemplate, nameInput, jobInput, popups } from "../index.js";
+import { openModal, closeModal } from "../components/modal.js";
 import { popupTypeImage } from "../index.js";
 
 //todo: Функция создания карточки
@@ -44,4 +44,20 @@ export function openCard(card) {
   popupImage.src = card.querySelector(".card__image").src;
   popupCaption.textContent = card.querySelector(".card__title").textContent;;
   openModal(popupTypeImage);
+}
+
+
+//todo: Функция отправки новых данных профиля
+export function handleProfileEditSubmit(evt) {
+  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+  // Получите значение полей jobInput и nameInput из свойства value
+  let nameValue = nameInput.value;
+  let jobValue = jobInput.value;
+  // Выберите элементы, куда должны быть вставлены значения полей
+  let profileTitle = document.querySelector(".profile__title");
+  let profileDescription = document.querySelector(".profile__description");
+  // Вставьте новые значения с помощью textContent
+  profileTitle.textContent = nameValue;
+  profileDescription.textContent = jobValue;
+  closeModal(popups);
 }

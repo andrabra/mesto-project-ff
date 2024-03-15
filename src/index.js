@@ -5,6 +5,7 @@ import {
   deleteCard,
   likeCard,
   openCard,
+  handleProfileEditSubmit
 } from "../src/components/card.js";
 import {
   openModal,
@@ -20,7 +21,7 @@ const cardContainer = document.querySelector(".places__list"); //записыв�
 //todo: кнопки открытия попапов
 const editBtn = document.querySelector(".profile__edit-button");
 const addBtn = document.querySelector(".profile__add-button");
-const imageBtns = document.querySelectorAll(".card__image");
+// const imageBtns = document.querySelectorAll(".card__image");
 //todo: попапы
 const popupTypeEdit = document.querySelector(".popup_type_edit");
 const popupTypeNewCard = document.querySelector(".popup_type_new-card");
@@ -28,10 +29,10 @@ export const popupTypeImage = document.querySelector(".popup_type_image");
 //todo: форма редактирования профиля
 const profileForm = popupTypeEdit.querySelector(".popup__form");
 //todo: кнопки закрытия попапов
-const popups = document.querySelectorAll(".popup");
+export const popups = document.querySelectorAll(".popup");
 const popupCloseBtns = document.querySelectorAll(".popup__close");
 
-//* Открытие попапов
+//todo: Открытие попапов
 editBtn.addEventListener("click", () => {
   onOpenProfileModal(profileForm);
   openModal(popupTypeEdit);
@@ -40,10 +41,10 @@ editBtn.addEventListener("click", () => {
 addBtn.addEventListener("click", () => {
   openModal(popupTypeNewCard);
 });
-//* Открытие попапов
 
-//* Закрытие попапов
-document.addEventListener("keydown", function (event) {
+
+//todo: Закрытие попапов
+document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     closeModal(popups);
   }
@@ -62,42 +63,28 @@ popups.forEach((popup) => {
     }
   });
 });
-//* Закрытие попапов
 
-// Находим форму в DOM
+
+//todo: Находим форму в DOM
 const formElement = popupTypeEdit.querySelector(".popup__form");
-// Находим поля формы в DOM
-const nameInput = formElement.querySelector(".popup__input_type_name");
-const jobInput = formElement.querySelector(".popup__input_type_description");
+//todo: Находим поля формы в DOM
+export const nameInput = formElement.querySelector(".popup__input_type_name");
+export const jobInput = formElement.querySelector(".popup__input_type_description");
+//todo: 
+formElement.addEventListener("submit", handleProfileEditSubmit);
 
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
-function handleFormSubmit(evt) {
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-  // Получите значение полей jobInput и nameInput из свойства value
-  let nameValue = nameInput.value;
-  let jobValue = jobInput.value;
-  // Выберите элементы, куда должны быть вставлены значения полей
-  let profileTitle = document.querySelector(".profile__title");
-  let profileDescription = document.querySelector(".profile__description");
-  // Вставьте новые значения с помощью textContent
-  profileTitle.textContent = nameValue;
-  profileDescription.textContent = jobValue;
-  closeModal(popups);
-}
 
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
-formElement.addEventListener("submit", handleFormSubmit);
 
+
+//todo: Находим форму в DOM
 const newPlaceForm = popupTypeNewCard.querySelector(".popup__form");
-
-const placeNameInput = newPlaceForm.querySelector(
+//todo: Находим поля формы в DOM
+export const placeNameInput = newPlaceForm.querySelector(
   ".popup__input_type_card-name"
 );
-const linkInput = newPlaceForm.querySelector(".popup__input_type_url");
+export const linkInput = newPlaceForm.querySelector(".popup__input_type_url");
 
-function handleNewCard(evt) {
+function handleNewCardSubmit(evt) {
   evt.preventDefault();
 
   let name = placeNameInput.value;
@@ -110,7 +97,7 @@ function handleNewCard(evt) {
 
 popupTypeNewCard
   .querySelector(".popup__form")
-  .addEventListener("submit", handleNewCard);
+  .addEventListener("submit", handleNewCardSubmit);
 
 //todo: Вывести карточки на страницу
 function displayCard(arrCards) {
