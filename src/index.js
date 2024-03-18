@@ -28,10 +28,6 @@ const editProfileForm = document.forms["edit-profile"];
 export const popups = document.querySelectorAll(".popup");
 const popupCloseBtns = document.querySelectorAll(".popup__close");
 
-
-
-
-
 //todo: Данные из профиля
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
