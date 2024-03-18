@@ -1,7 +1,7 @@
 import "./pages/index.css";
 import { initialCards } from "./components/cards.js";
 import { createCard, deleteCard, likeButton, cardContainer } from "./components/card.js";
-import { openModal, closeModal } from "./components/modal.js";
+import { openModal, closeModal, handleEscape, popups } from "./components/modal.js";
 
 
 
@@ -20,28 +20,28 @@ const popupCaption = popupTypeImage.querySelector(".popup__caption");
 const editProfileForm = document.forms["edit-profile"];
 
 //todo: кнопки закрытия попапов
-export const popups = document.querySelectorAll(".popup");
+// const popups = document.querySelectorAll(".popup");
 
 //todo: Данные из профиля
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 
 //todo: Находим поля формы в DOM
-export const nameInput = editProfileForm.querySelector(
+const nameInput = editProfileForm.querySelector(
   ".popup__input_type_name"
 );
-export const jobInput = editProfileForm.querySelector(
+const jobInput = editProfileForm.querySelector(
   ".popup__input_type_description"
 );
 
 //todo: Находим форму добавления новой карточки в DOM
-export const newPlaceForm = document.forms["new-place"];
+const newPlaceForm = document.forms["new-place"];
 
 //todo: Находим поля формы в DOM
-export const placeNameInput = newPlaceForm.querySelector(
+const placeNameInput = newPlaceForm.querySelector(
   ".popup__input_type_card-name"
 );
-export const linkInput = newPlaceForm.querySelector(".popup__input_type_url");
+const linkInput = newPlaceForm.querySelector(".popup__input_type_url");
 
 //todo: Открытие попапов
 editBtn.addEventListener("click", () => {
@@ -61,13 +61,7 @@ function openCard(card) {
 }
 
 //todo: Закрытие попапов
-export function handleEscape(evt) {
-  if (evt.key === "Escape") {
-    popups.forEach((popup) => {
-      closeModal(popup);
-    });
-  }
-}
+
 popups.forEach((popup) => {
   popup.addEventListener("mousedown", (evt) => {
     if (evt.target.classList.contains("popup_is-opened")) {
@@ -80,7 +74,7 @@ popups.forEach((popup) => {
 });
 
 //todo: Функция отправки новых данных профиля
-export function handleProfileEditSubmit(evt) {
+function handleProfileEditSubmit(evt) {
   evt.preventDefault();
 
   const nameValue = nameInput.value;
@@ -95,7 +89,7 @@ export function handleProfileEditSubmit(evt) {
 }
 
 //todo: Функция создания новой карточки
-export function handleNewCardSubmit(evt) {
+function handleNewCardSubmit(evt) {
   evt.preventDefault();
 
   const name = placeNameInput.value;

@@ -1,4 +1,4 @@
-import { handleEscape } from "../index.js";
+export const popups = document.querySelectorAll(".popup");
 
 export function openModal(element) {
   element.classList.add("popup_is-opened");
@@ -8,4 +8,12 @@ export function openModal(element) {
 export function closeModal(element) {
   element.classList.remove("popup_is-opened");
   document.removeEventListener("keydown", handleEscape);
+}
+
+export function handleEscape(evt) {
+  if (evt.key === "Escape") {
+    popups.forEach((popup) => {
+      closeModal(popup);
+    });
+  }
 }
