@@ -92,7 +92,9 @@ export function handleProfileEditSubmit(evt) {
   profileTitle.textContent = nameValue;
   profileDescription.textContent = jobValue;
 
-  closeModal(popups);
+  popups.forEach((popup) => {
+    closeModal(popup);
+  });
 }
 
 //todo: Функция создания новой карточки
@@ -104,7 +106,9 @@ export function handleNewCardSubmit(evt) {
 
   cardContainer.prepend(createCard(link, name, deleteCard, likeCard, openCard));
   newPlaceForm.reset();
-  closeModal(popups);
+  popups.forEach((popup) => {
+    closeModal(popup);
+  });
 }
 
 //todo: Добавление обработчиков на формы
@@ -121,6 +125,7 @@ function displayCards(arrCards) {
   arrCards.forEach(function (item) {
     cardContainer.append(
       createCard(item.link, item.name, deleteCard, likeCard, openCard)
+      //!!! Подскажите, пожалуйста, подробнее как можно было бы упаковать в объект данные и колбеки, в контексте моей реализации
     );
   });
 }
