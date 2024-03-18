@@ -1,7 +1,8 @@
-import {
-  cardTemplate,
-} from "../index.js";
+//todo: Темплейт карточки
+export const cardTemplate = document.querySelector("#card-template").content;
 
+//todo: Список со всеми карточками
+export const cardContainer = document.querySelector(".places__list");
 
 //todo: Функция создания карточки
 export function createCard(imgSrc, title, deleteFnc, likeCard, openCard) {

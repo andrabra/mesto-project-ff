@@ -1,12 +1,9 @@
 import "./pages/index.css";
 import { initialCards } from "./components/cards.js";
-import { createCard, deleteCard, likeButton } from "./components/card.js";
+import { createCard, deleteCard, likeButton, cardContainer } from "./components/card.js";
 import { openModal, closeModal } from "./components/modal.js";
 
-//todo: Темплейт карточки
-export const cardTemplate = document.querySelector("#card-template").content; //записываю содержимое блока template
-//todo: Список со всеми карточками
-export const cardContainer = document.querySelector(".places__list"); //записываю место куда буду вставлять карточки
+
 
 //todo: кнопки открытия попапов
 const editBtn = document.querySelector(".profile__edit-button");
@@ -15,7 +12,7 @@ const addBtn = document.querySelector(".profile__add-button");
 //todo: попапы
 const popupTypeEdit = document.querySelector(".popup_type_edit");
 const popupTypeNewCard = document.querySelector(".popup_type_new-card");
-export const popupTypeImage = document.querySelector(".popup_type_image");
+const popupTypeImage = document.querySelector(".popup_type_image");
 const popupImage = popupTypeImage.querySelector(".popup__image");
 const popupCaption = popupTypeImage.querySelector(".popup__caption");
 
@@ -104,7 +101,7 @@ export function handleNewCardSubmit(evt) {
   const name = placeNameInput.value;
   const link = linkInput.value;
 
-  cardContainer.prepend(createCard(link, name, deleteCard, likeCard, openCard));
+  cardContainer.prepend(createCard(link, name, deleteCard, likeButton, openCard));
   newPlaceForm.reset();
   popups.forEach((popup) => {
     closeModal(popup);
