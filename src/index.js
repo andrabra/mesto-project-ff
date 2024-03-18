@@ -1,13 +1,6 @@
 import "./pages/index.css";
 import { initialCards } from "./components/cards.js";
-import {
-  createCard,
-  deleteCard,
-  likeCard,
-  openCard,
-  handleProfileEditSubmit,
-  handleNewCardSubmit,
-} from "./components/card.js";
+import { createCard, deleteCard, likeCard } from "./components/card.js";
 import { openModal, closeModal } from "./components/modal.js";
 
 //todo: Темплейт карточки
@@ -23,19 +16,25 @@ const addBtn = document.querySelector(".profile__add-button");
 const popupTypeEdit = document.querySelector(".popup_type_edit");
 const popupTypeNewCard = document.querySelector(".popup_type_new-card");
 export const popupTypeImage = document.querySelector(".popup_type_image");
+const popupImage = popupTypeImage.querySelector(".popup__image");
+const popupCaption = popupTypeImage.querySelector(".popup__caption");
 
 //todo: форма редактирования профиля
 const editProfileForm = document.forms["edit-profile"];
+
+//todo: данные из профиля
 
 //todo: кнопки закрытия попапов
 export const popups = document.querySelectorAll(".popup");
 const popupCloseBtns = document.querySelectorAll(".popup__close");
 
-//todo: Текстовые поля формы
-const profileTitle = document.querySelector(".profile__title").textContent;
-const profileDescription = document.querySelector(
-  ".profile__description"
-).textContent;
+
+
+
+
+//todo: Данные из профиля
+const profileTitle = document.querySelector(".profile__title");
+const profileDescription = document.querySelector(".profile__description");
 
 //todo: Находим поля формы в DOM
 export const nameInput = editProfileForm.querySelector(
@@ -47,7 +46,7 @@ export const jobInput = editProfileForm.querySelector(
 
 //todo: Находим форму добавления новой карточки в DOM
 export const newPlaceForm = document.forms["new-place"];
-// new-place
+
 //todo: Находим поля формы в DOM
 export const placeNameInput = newPlaceForm.querySelector(
   ".popup__input_type_card-name"
@@ -63,6 +62,14 @@ editBtn.addEventListener("click", () => {
 addBtn.addEventListener("click", () => {
   openModal(popupTypeNewCard);
 });
+
+//todo: Функция открытия попапа с карточкой
+export function openCard(card) {
+  popupImage.src = card.querySelector(".card__image").src;
+  popupImage.alt = card.querySelector(".card__image").alt;
+  popupCaption.textContent = card.querySelector(".card__title").textContent;
+  openModal(popupTypeImage);
+}
 
 //todo: Закрытие попапов
 document.addEventListener("keydown", (event) => {
@@ -85,13 +92,38 @@ popups.forEach((popup) => {
   });
 });
 
+//todo: Функция отправки новых данных профиля
+export function handleProfileEditSubmit(evt) {
+  evt.preventDefault();
+
+  const nameValue = nameInput.value;
+  const jobValue = jobInput.value;
+
+  profileTitle.textContent = nameValue;
+  profileDescription.textContent = jobValue;
+
+  closeModal(popups);
+}
+
+//todo: Функция создания новой карточки
+export function handleNewCardSubmit(evt) {
+  evt.preventDefault();
+
+  const name = placeNameInput.value;
+  const link = linkInput.value;
+
+  cardContainer.prepend(createCard(link, name, deleteCard, likeCard, openCard));
+  newPlaceForm.reset();
+  closeModal(popups);
+}
+
 //todo: Добавление обработчиков на формы
 editProfileForm.addEventListener("submit", handleProfileEditSubmit);
 newPlaceForm.addEventListener("submit", handleNewCardSubmit);
 
 function onOpenProfileModal(form) {
-  form.elements.name.value = profileTitle;
-  form.elements.description.value = profileDescription;
+  form.elements.name.value = profileTitle.textContent;
+  form.elements.description.value = profileDescription.textContent;
 }
 
 //todo: Вывести карточки на страницу
