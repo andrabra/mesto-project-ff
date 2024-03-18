@@ -22,11 +22,8 @@ const popupCaption = popupTypeImage.querySelector(".popup__caption");
 //todo: форма редактирования профиля
 const editProfileForm = document.forms["edit-profile"];
 
-//todo: данные из профиля
-
 //todo: кнопки закрытия попапов
 export const popups = document.querySelectorAll(".popup");
-const popupCloseBtns = document.querySelectorAll(".popup__close");
 
 //todo: Данные из профиля
 const profileTitle = document.querySelector(".profile__title");
@@ -59,8 +56,7 @@ addBtn.addEventListener("click", () => {
   openModal(popupTypeNewCard);
 });
 
-//todo: Функция открытия попапа с карточкой
-export function openCard(card) {
+function openCard(card) {
   popupImage.src = card.querySelector(".card__image").src;
   popupImage.alt = card.querySelector(".card__image").alt;
   popupCaption.textContent = card.querySelector(".card__title").textContent;
@@ -68,22 +64,20 @@ export function openCard(card) {
 }
 
 //todo: Закрытие попапов
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    closeModal(popups);
+export function handleEscape(evt) {
+  if (evt.key === "Escape") {
+    popups.forEach((popup) => {
+      closeModal(popup);
+    });
   }
-});
-
-popupCloseBtns.forEach((popup) => {
-  popup.addEventListener("mousedown", () => {
-    closeModal(popups);
-  });
-});
-
+}
 popups.forEach((popup) => {
   popup.addEventListener("mousedown", (evt) => {
-    if (evt.currentTarget === evt.target) {
-      closeModal(popups);
+    if (evt.target.classList.contains("popup_is-opened")) {
+      closeModal(popup);
+    }
+    if (evt.target.classList.contains("popup__close")) {
+      closeModal(popup);
     }
   });
 });
