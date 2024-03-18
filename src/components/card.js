@@ -1,11 +1,13 @@
+import { openModal } from "./modal";
 //todo: Темплейт карточки
 export const cardTemplate = document.querySelector("#card-template").content;
 
-//todo: Список со всеми карточками
-export const cardContainer = document.querySelector(".places__list");
-
 //todo: Функция создания карточки
-export function createCard(imgSrc, title, deleteFnc, likeCard, openCard) {
+export function createCard(
+  imgSrc,
+  title,
+  { deleteCard, likeButton, openCard }
+) {
   const cardTemplateClone = cardTemplate.querySelector(".card").cloneNode(true); //выбираю карточку из template и клонирую её
 
   const deleteButton = cardTemplateClone.querySelector(".card__delete-button"); //выбираю кнопку из копии карточки
@@ -13,7 +15,7 @@ export function createCard(imgSrc, title, deleteFnc, likeCard, openCard) {
   const cardImage = cardTemplateClone.querySelector(".card__image"); //выбираю из клона тег изображения
   const cardTitle = cardTemplateClone.querySelector(".card__title"); //выбираю из клона тег тайтла
 
-  deleteButton.addEventListener("click", () => deleteFnc(cardTemplateClone));
+  deleteButton.addEventListener("click", () => deleteCard(cardTemplateClone));
   cardLike.addEventListener("click", () => likeButton(cardLike));
 
   cardImage.addEventListener("click", () => {
@@ -28,10 +30,25 @@ export function createCard(imgSrc, title, deleteFnc, likeCard, openCard) {
 }
 
 //todo: Функция удаления карточки
-export function deleteCard(card) {
+function deleteCard(card) {
   card.remove();
 }
 //todo: Функция лайка карточки
-export function likeButton(button) {
+function likeButton(button) {
   button.classList.toggle("card__like-button_is-active");
 }
+
+function openCard(card) {
+  const cardImage = card.querySelector(".card__image");
+  const cardTitle = card.querySelector(".card__title");
+  const popupTypeImage = document.querySelector(".popup_type_image");
+  const popupImage = popupTypeImage.querySelector(".popup__image");
+  const popupCaption = popupTypeImage.querySelector(".popup__caption");
+
+  popupImage.src = cardImage.src;
+  popupImage.alt = cardImage.alt;
+  popupCaption.textContent = cardTitle.textContent;
+  openModal(popupTypeImage);
+}
+
+export const cardCallbacks = { deleteCard, likeButton, openCard };

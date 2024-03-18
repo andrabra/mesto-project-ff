@@ -17,3 +17,9 @@ export function handleEscape(evt) {
     });
   }
 }
+
+export function closeAllModals() {
+  popups.forEach((popup) => {
+    closeModal(popup);
+  });
+}
