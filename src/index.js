@@ -1,9 +1,6 @@
 import "./pages/index.css";
 import { initialCards } from "./components/cards.js";
-import {
-  createCard,
-  cardCallbacks,
-} from "./components/card.js";
+import { createCard, cardCallbacks } from "./components/card.js";
 import {
   openModal,
   closeModal,
@@ -21,8 +18,6 @@ const addBtn = document.querySelector(".profile__add-button");
 //todo: попапы
 const popupTypeEdit = document.querySelector(".popup_type_edit");
 const popupTypeNewCard = document.querySelector(".popup_type_new-card");
-
-
 
 //todo: форма редактирования профиля
 const editProfileForm = document.forms["edit-profile"];
@@ -56,8 +51,6 @@ addBtn.addEventListener("click", () => {
   openModal(popupTypeNewCard);
 });
 
-
-
 //todo: Закрытие попапов
 
 popups.forEach((popup) => {
@@ -88,12 +81,11 @@ function handleProfileEditSubmit(evt) {
 function handleNewCardSubmit(evt) {
   evt.preventDefault();
 
-  const name = placeNameInput.value;
-  const link = linkInput.value;
-
-  cardContainer.prepend(
-    createCard(link, name, cardCallbacks)
-  );
+  const newCard = {
+    link: linkInput.value,
+    name: placeNameInput.value,
+  };
+  cardContainer.prepend(createCard(newCard, cardCallbacks));
   newPlaceForm.reset();
 
   closeAllModals();
@@ -108,17 +100,10 @@ function onOpenProfileModal(form) {
   form.elements.description.value = profileDescription.textContent;
 }
 
-
-
-
 //todo: Вывести карточки на страницу
 function displayCards(arrCards) {
   arrCards.forEach(function (item) {
-    cardContainer.append(
-      createCard(item.link, item.name, cardCallbacks)
-
-      //!!! Подскажите, пожалуйста, подробнее как можно было бы упаковать в объект данные и колбеки, в контексте моей реализации
-    );
+    cardContainer.append(createCard(item, cardCallbacks));
   });
 }
 

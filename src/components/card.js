@@ -4,8 +4,7 @@ export const cardTemplate = document.querySelector("#card-template").content;
 
 //todo: Функция создания карточки
 export function createCard(
-  imgSrc,
-  title,
+  { link, name },
   { deleteCard, likeButton, openCard }
 ) {
   const cardTemplateClone = cardTemplate.querySelector(".card").cloneNode(true); //выбираю карточку из template и клонирую её
@@ -22,11 +21,11 @@ export function createCard(
     openCard(cardTemplateClone);
   });
 
-  cardImage.src = imgSrc; //заполняю из аргумента
-  cardImage.alt = title; //заполняю alt
-  cardTitle.textContent = title; //заполняю из аргумента
+  cardImage.src = link;
+  cardImage.alt = name;
+  cardTitle.textContent = name;
 
-  return cardTemplateClone; //возвращаю заполненную карточку
+  return cardTemplateClone;
 }
 
 //todo: Функция удаления карточки
@@ -37,7 +36,7 @@ function deleteCard(card) {
 function likeButton(button) {
   button.classList.toggle("card__like-button_is-active");
 }
-
+//todo: Функция открытия карточки
 function openCard(card) {
   const cardImage = card.querySelector(".card__image");
   const cardTitle = card.querySelector(".card__title");
