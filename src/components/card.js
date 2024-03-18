@@ -13,7 +13,7 @@ export function createCard(imgSrc, title, deleteFnc, likeCard, openCard) {
   const cardTitle = cardTemplateClone.querySelector(".card__title"); //выбираю из клона тег тайтла
 
   deleteButton.addEventListener("click", () => deleteFnc(cardTemplateClone));
-  cardLike.addEventListener("click", () => likeCard(cardLike));
+  cardLike.addEventListener("click", () => likeButton(cardLike));
 
   cardImage.addEventListener("click", () => {
     openCard(cardTemplateClone);
@@ -31,6 +31,6 @@ export function deleteCard(card) {
   card.remove();
 }
 //todo: Функция лайка карточки
-export function likeCard(card) {
-  card.classList.toggle("card__like-button_is-active");
+export function likeButton(button) {
+  button.classList.toggle("card__like-button_is-active");
 }

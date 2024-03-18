@@ -1,6 +1,6 @@
 import "./pages/index.css";
 import { initialCards } from "./components/cards.js";
-import { createCard, deleteCard, likeCard } from "./components/card.js";
+import { createCard, deleteCard, likeButton } from "./components/card.js";
 import { openModal, closeModal } from "./components/modal.js";
 
 //todo: Темплейт карточки
@@ -124,7 +124,7 @@ function onOpenProfileModal(form) {
 function displayCards(arrCards) {
   arrCards.forEach(function (item) {
     cardContainer.append(
-      createCard(item.link, item.name, deleteCard, likeCard, openCard)
+      createCard(item.link, item.name, deleteCard, likeButton, openCard)
       //!!! Подскажите, пожалуйста, подробнее как можно было бы упаковать в объект данные и колбеки, в контексте моей реализации
     );
   });
