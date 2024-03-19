@@ -12,14 +12,10 @@ export function closeModal(element) {
 
 export function handleEscape(evt) {
   if (evt.key === "Escape") {
-    popups.forEach((popup) => {
-      closeModal(popup);
-    });
+    closeAllModals();
   }
 }
 
 export function closeAllModals() {
-  popups.forEach((popup) => {
-    closeModal(popup);
-  });
+  popups.forEach(closeModal);
 }

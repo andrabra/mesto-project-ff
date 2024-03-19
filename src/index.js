@@ -77,6 +77,14 @@ function handleProfileEditSubmit(evt) {
   closeAllModals();
 }
 
+function renderCard(item, method = "prepend") {
+  // создаем карточку, передавая обработчики в виде объекта `callbacks`
+  const cardElement = createCard(item, cardCallbacks);
+
+  // вставляем карточку, используя метод (вставится `prepend` или `append`)
+  cardContainer[method](cardElement);
+}
+
 //todo: Функция создания новой карточки
 function handleNewCardSubmit(evt) {
   evt.preventDefault();
@@ -85,9 +93,10 @@ function handleNewCardSubmit(evt) {
     link: linkInput.value,
     name: placeNameInput.value,
   };
-  cardContainer.prepend(createCard(newCard, cardCallbacks));
-  newPlaceForm.reset();
 
+  renderCard(newCard);
+
+  newPlaceForm.reset();
   closeAllModals();
 }
 
@@ -103,7 +112,7 @@ function onOpenProfileModal(form) {
 //todo: Вывести карточки на страницу
 function displayCards(arrCards) {
   arrCards.forEach(function (item) {
-    cardContainer.append(createCard(item, cardCallbacks));
+    renderCard(item, "append");
   });
 }
 
