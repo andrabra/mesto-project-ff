@@ -1,6 +1,6 @@
 import "./pages/index.css";
 import { initialCards } from "./components/cards.js";
-import { createCard, cardCallbacks } from "./components/card.js";
+import { createCard, deleteCard, likeButton } from "./components/card.js";
 import {
   openModal,
   closeModal,
@@ -40,6 +40,10 @@ const placeNameInput = newPlaceForm.querySelector(
   ".popup__input_type_card-name"
 );
 const linkInput = newPlaceForm.querySelector(".popup__input_type_url");
+
+const popupTypeImage = document.querySelector(".popup_type_image");
+const popupImage = popupTypeImage.querySelector(".popup__image");
+const popupCaption = popupTypeImage.querySelector(".popup__caption");
 
 //todo: Открытие попапов
 editBtn.addEventListener("click", () => {
@@ -108,6 +112,16 @@ function onOpenProfileModal(form) {
   form.elements.name.value = profileTitle.textContent;
   form.elements.description.value = profileDescription.textContent;
 }
+
+//todo: Функция открытия карточки
+function openCard(link, name) {
+  popupImage.src = link;
+  popupImage.alt = name;
+  popupCaption.textContent = name;
+  openModal(popupTypeImage);
+}
+
+export const cardCallbacks = { deleteCard, likeButton, openCard };
 
 //todo: Вывести карточки на страницу
 function displayCards(arrCards) {
