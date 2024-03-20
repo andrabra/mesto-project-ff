@@ -121,7 +121,7 @@ function openCard(link, name) {
   openModal(popupTypeImage);
 }
 
-export const cardCallbacks = { deleteCard, likeButton, openCard };
+const cardCallbacks = { deleteCard, likeButton, openCard };
 
 //todo: Вывести карточки на страницу
 function displayCards(arrCards) {
